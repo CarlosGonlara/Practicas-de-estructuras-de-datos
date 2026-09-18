@@ -26,7 +26,13 @@ int main() {
         case 1: {
             string nombre;
             int edad;
-            float calificacion1, calificacion2, calificacion3;
+            int cantidadCalificaciones;
+            int aprobadas = 0;
+            int reprobadas = 0;
+            float suma = 0;
+            float calificacion;
+            float calificacionMayor = 0;
+            float calificacionMenor = 10;
             float promedio;
 
             cin.ignore();
@@ -39,28 +45,42 @@ int main() {
                 break;
             }
 
-            cout << "Calificacion 1: ";
-            cin >> calificacion1;
-            if (calificacion1 < 0 || calificacion1 > 10) {
-                cout << "Calificacion invalida" << endl;
+            cout << "Cuantas calificaciones deseas registrar? ";
+            cin >> cantidadCalificaciones;
+            if (cantidadCalificaciones <= 0) {
+                cout << "La cantidad de calificaciones debe ser mayor que cero" << endl;
                 break;
             }
 
-            cout << "Calificacion 2: ";
-            cin >> calificacion2;
-            if (calificacion2 < 0 || calificacion2 > 10) {
-                cout << "Calificacion invalida" << endl;
+            bool calificacionesValidas = true;
+            for (int i = 0; i < cantidadCalificaciones; i++) {
+                cout << "Calificacion " << i + 1 << ": ";
+                cin >> calificacion;
+                if (calificacion < 0 || calificacion > 10) {
+                    cout << "Calificacion invalida" << endl;
+                    calificacionesValidas = false;
+                    break;
+                }
+
+                suma += calificacion;
+                if (calificacion >= 6) {
+                    aprobadas++;
+                } else {
+                    reprobadas++;
+                }
+                if (calificacion > calificacionMayor) {
+                    calificacionMayor = calificacion;
+                }
+                if (calificacion < calificacionMenor) {
+                    calificacionMenor = calificacion;
+                }
+            }
+
+            if (!calificacionesValidas) {
                 break;
             }
 
-            cout << "Calificacion 3: ";
-            cin >> calificacion3;
-            if (calificacion3 < 0 || calificacion3 > 10) {
-                cout << "Calificacion invalida" << endl;
-                break;
-            }
-
-            promedio = (calificacion1 + calificacion2 + calificacion3) / 3;
+            promedio = suma / cantidadCalificaciones;
 
             string estado;
             if (promedio >= 9) {
@@ -80,6 +100,10 @@ int main() {
             cout << "Edad: " << edad << endl;
             cout << "Promedio: " << promedio << endl;
             cout << "Estado: " << estado << endl;
+            cout << "Calificaciones aprobatorias: " << aprobadas << endl;
+            cout << "Calificaciones reprobatorias: " << reprobadas << endl;
+            cout << "Calificacion mas alta: " << calificacionMayor << endl;
+            cout << "Calificacion mas baja: " << calificacionMenor << endl;
             break;
         }
         case 2:
