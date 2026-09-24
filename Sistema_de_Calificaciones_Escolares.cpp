@@ -40,9 +40,9 @@ int main() {
             getline(cin, nombre);
             cout << "Edad: ";
             cin >> edad;
-            if (edad < 0 || edad > 120) {
-                cout << "Edad invalida" << endl;
-                break;
+            while (edad < 0 || edad > 120) {
+                cout << "Edad invalida. Ingresa una edad entre 0 y 120: ";
+                cin >> edad;
             }
 
             cout << "Cuantas calificaciones deseas registrar? ";
@@ -52,14 +52,12 @@ int main() {
                 break;
             }
 
-            bool calificacionesValidas = true;
             for (int i = 0; i < cantidadCalificaciones; i++) {
                 cout << "Calificacion " << i + 1 << ": ";
                 cin >> calificacion;
-                if (calificacion < 0 || calificacion > 10) {
-                    cout << "Calificacion invalida" << endl;
-                    calificacionesValidas = false;
-                    break;
+                while (calificacion < 0 || calificacion > 10) {
+                    cout << "Calificacion invalida. Ingresa una calificacion entre 0 y 10: ";
+                    cin >> calificacion;
                 }
 
                 suma += calificacion;
@@ -74,10 +72,6 @@ int main() {
                 if (calificacion < calificacionMenor) {
                     calificacionMenor = calificacion;
                 }
-            }
-
-            if (!calificacionesValidas) {
-                break;
             }
 
             promedio = suma / cantidadCalificaciones;
