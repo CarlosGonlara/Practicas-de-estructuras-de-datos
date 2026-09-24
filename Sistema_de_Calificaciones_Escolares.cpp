@@ -19,10 +19,22 @@ int main() {
         cout << "1. Registrar estudiante" << endl;
         cout << "2. Ver informacion de los estudiantes" << endl;
         cout << "3. Salir" << endl;
+        cout << "4. Registrar otro estudiante" << endl;
         cout << "Opcion: ";
-        cin >> opcion;
+        do {
+            cin >> opcion;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                opcion = 0;
+            }
+            if (opcion < 1 || opcion > 4) {
+                cout << "Opcion invalida. Ingresa una opcion del 1 al 4: ";
+            }
+        } while (opcion < 1 || opcion > 4);
 
         switch (opcion) {
+        case 4:
         case 1: {
             string nombre;
             int edad;
@@ -118,8 +130,6 @@ int main() {
         case 3:
             cout << "Saliendo del programa..." << endl;
             break;
-        default:
-            cout << "Opcion invalida. Intente nuevamente." << endl;
         }
     } while (opcion != 3);
 
